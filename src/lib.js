@@ -60,7 +60,7 @@ const fallbackLink = async (journey, bahncard, travelClass, age = 'A') => {
 }
 
 export const generateLink = async (journey, bahncard, travelClass) => {
-	if (journey?.refreshToken) {
+	if (journey.type === 'journey' && journey.refreshToken) {
 		return await generateDbJourneyUrl(journey.refreshToken)
 	} else {
 		return fallbackLink(journey, bahncard, travelClass)
