@@ -29,7 +29,7 @@ const fallbackLink = async (journey, bahncard, travelClass, age = 'A') => {
 	if (!['A', 'Y'].includes(age)) throw new Error('invalid age')
 
 	const params = new URLSearchParams()
-	params.set('sts', 'true')
+	params.set('sts', 'true') // start search immediately
 
 	const firstLeg = journey.legs[0]
 	params.set('so', firstLeg.origin.name) // display name
@@ -61,7 +61,7 @@ const fallbackLink = async (journey, bahncard, travelClass, age = 'A') => {
 
 export const generateLink = async (journey, bahncard, travelClass) => {
 	if (journey.type === 'journey' && journey.refreshToken) {
-		return await generateDbJourneyUrl(journey.refreshToken)
+		return await generateDbJourneyUrl(journey.refreshToken, 'de')
 	} else {
 		return fallbackLink(journey, bahncard, travelClass)
 	}
